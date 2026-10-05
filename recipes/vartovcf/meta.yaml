@@ -1,5 +1,5 @@
 {% set name = "vartovcf" %}
-{% set version = "1.5.1" %}
+{% set version = "3.0.0" %}
 
 package:
   name: {{ name }}
@@ -7,20 +7,22 @@ package:
 
 source:
   url: https://github.com/clintval/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: aee2646f0db41bd2525d46d7daa291892e14cd517a18b2b7a09d31f7004107ff
+  sha256: 5721bbefb3993471c5d1dc3ca5836700bebc953f669e16f58a57f73abaa58185
 
 build:
   number: 0
   run_exports:
-    - {{ pin_subpackage(name, max_pin="x.x") }}
+    - {{ pin_subpackage(name, max_pin="x") }}
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
-    - clangdev
+    - clang
+    - libclang
     - pkg-config
     - make
     - cmake
